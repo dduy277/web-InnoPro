@@ -24,10 +24,6 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(auth, email, password)
-  }
-
-  function login(email, password) {
     signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
       //const user = userCredential.user;
     })
