@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
 
   function signup(email, password) {
     createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      //const user = userCredential.user;
+      const user = userCredential.user;
     })
       .catch((err) => {
         console.log(err.code);
@@ -24,9 +24,9 @@ export function AuthProvider({ children }) {
     return
   }
 
-  function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      //const user = userCredential.user;
+  async function login(email, password) {
+    await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      const user = userCredential.user;
     })
       .catch((err) => {
         console.log(err.code);
