@@ -20,7 +20,7 @@ function App() {
           <AuthProvider>
             <Routes>
               {/* Profile/user */}
-              <Route exact path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
+              <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
               <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} ></Route>
               {/* Auth */}
               <Route path="/signup" element={<Signup />} />
