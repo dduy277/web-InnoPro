@@ -14,25 +14,25 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   function signup(email, password) {
-    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      //const user = userCredential.user;
+    createUserWithEmailAndPassword(auth, email, password)/* .then((userCredential) => {
+      const user = userCredential.user;
     })
       .catch((err) => {
         console.log(err.code);
         console.log(err.message);
       });
-    return
+    return */
   }
 
-  function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      //const user = userCredential.user;
+  async function login(email, password) {
+    await signInWithEmailAndPassword(auth, email, password)/* .then((userCredential) => {
+      const user = userCredential.user;
     })
       .catch((err) => {
         console.log(err.code);
         console.log(err.message);
       });
-    return
+    return */
   }
 
   function logout() {
