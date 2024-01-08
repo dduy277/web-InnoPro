@@ -1,7 +1,13 @@
 import React, { useContext, useState, useEffect } from "react"
 import { auth } from "../firebase.js"
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  updateEmail as updateEmailFirebase,
+  updatePassword as updatePasswordFirebase,
+} from "firebase/auth";
 
 const AuthContext = React.createContext()
 
@@ -14,48 +20,36 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   function signup(email, password) {
-    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      //const user = userCredential.user;
-    })
-      .catch((err) => {
-        console.log(err.code);
-        console.log(err.message);
-      });
-    return
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, email, password)
   }
 
-  function login(email, password) {
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      //const user = userCredential.user;
-    })
-      .catch((err) => {
-        console.log(err.code);
-        console.log(err.message);
-      });
-    return
+  async function login(email, password) { /* dùng setLoading(true) vẫn dc nhưng await đẹp hơn :v */
+    await signInWithEmailAndPassword(auth, email, password)
   }
 
   function logout() {
-    return auth.signOut()
+    localStorage.removeItem('genius-token');
+    return signOut(auth);
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email)
+    return sendPasswordResetEmail(auth, email);
   }
 
   function updateEmail(email) {
-    return currentUser.updateEmail(email)
+    return updateEmailFirebase(auth, currentUser, email);
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password)
+    return updatePasswordFirebase(currentUser, password);
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
-      setLoading(false)
-    })
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
 
     return unsubscribe
   }, [])
@@ -67,7 +61,7 @@ export function AuthProvider({ children }) {
     logout,
     resetPassword,
     updateEmail,
-    updatePassword
+    updatePassword,
   }
 
   return (
