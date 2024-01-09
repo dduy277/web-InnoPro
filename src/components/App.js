@@ -8,6 +8,7 @@ import Login from "./authentication/Login"
 import PrivateRoute from "./authentication/PrivateRoute"
 import ForgotPassword from "./authentication/ForgotPassword"
 import UpdateProfile from "./authentication/UpdateProfile"
+import AddProducts from "./Addproduct.js"
 
 function App() {
   return (
@@ -19,9 +20,13 @@ function App() {
         <Router>
           <AuthProvider>
             <Routes>
+              {/* Products */}
+              <Route path="/add-products" element={<AddProducts />} />
+
               {/* Profile/user */}
               <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
               <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} ></Route>
+
               {/* Auth */}
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
