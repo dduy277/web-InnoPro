@@ -40,7 +40,7 @@ export default function AddProducts() {
 		const product_img = ref(storage, `product-images/${image.name}`);
 		const uploadTask = uploadBytesResumable(product_img, image)
 		uploadTask.on('state_changed', (snapshot) => {
-			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+			const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100 /* có thể thêm thanh loading bằng cái progress */
 			console.log(progress);
 		},
 			error => { setUploadError(error.message) },

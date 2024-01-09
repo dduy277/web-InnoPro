@@ -20,8 +20,9 @@ function App() {
         <Router>
           <AuthProvider>
             <Routes>
+
               {/* Products */}
-              <Route path="/add-products" element={<AddProducts />} />
+              <Route path="/add-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} />
 
               {/* Profile/user */}
               <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
