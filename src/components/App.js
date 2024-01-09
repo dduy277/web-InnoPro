@@ -8,8 +8,9 @@ import Login from "./authentication/Login"
 import PrivateRoute from "./authentication/PrivateRoute"
 import ForgotPassword from "./authentication/ForgotPassword"
 import UpdateProfile from "./authentication/UpdateProfile"
-import AddProducts from "./Addproduct.js"
-import Home from "./Home.js"
+import AddProducts from "./AddProduct.js"
+import DeleteProducts from "./DeleteProduct.js"
+/* import Home from "Home.js" */
 
 function App() {
   return (
@@ -22,9 +23,11 @@ function App() {
           <AuthProvider>
             <Routes>
               {/* Home */}
-              <Route exact path="/" element={<Home />} />
+              {/* <Route exact path="/" element={<Home />} /> */}
               {/* Products */}
               <Route path="/add-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} />
+              <Route path="/delete-products" element={<PrivateRoute><DeleteProducts /></PrivateRoute>} />
+              {/* <Route path="/update-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} /> */}
 
               {/* Profile/user */}
               <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
