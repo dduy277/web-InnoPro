@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { storage, db } from '../firebase.js'
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 
 export default function AddProducts() {
 	const [title, setTitle] = useState('');
@@ -44,19 +44,16 @@ export default function AddProducts() {
 			console.log(progress);
 		},
 			error => { setUploadError(error.message) },
-
-			/* upload product to database to storage */
 			() => {
-				/* upload img to storage */
-				//Ref('product-images').child(image.name).getDownloadURL().then(url => {
+				/* upload product to database */
 				getDownloadURL(product_img).then(async url => {
-					//db.collection('Products').add({
-					const docRef = await addDoc(collection(db, 'Products'), {
+					const docData = {
 						title,
 						description,
 						price: Number(price),
 						url
-					}).then(() => {
+					}
+					const docRef = await setDoc(doc(db, `Products`, `${title}`), docData).then(() => {
 						setSuccessMsg('Product added successfully');
 						setTitle('');
 						setDescription('');
