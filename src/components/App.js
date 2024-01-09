@@ -8,9 +8,9 @@ import Login from "./authentication/Login"
 import PrivateRoute from "./authentication/PrivateRoute"
 import ForgotPassword from "./authentication/ForgotPassword"
 import UpdateProfile from "./authentication/UpdateProfile"
-import AddProducts from "./AddProduct.js"
-import DeleteProducts from "./DeleteProduct.js"
-import UptateProducts from "./UptateProducts.js"
+import AddProducts from "./Product/AddProduct.js"
+import DeleteProducts from "./Product/DeleteProduct.js"
+import UptateProducts from "./Product/UptateProducts.js"
 /* import Home from "Home.js" */
 
 function App() {
