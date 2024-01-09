@@ -10,6 +10,7 @@ import ForgotPassword from "./authentication/ForgotPassword"
 import UpdateProfile from "./authentication/UpdateProfile"
 import AddProducts from "./AddProduct.js"
 import DeleteProducts from "./DeleteProduct.js"
+import UptateProducts from "./UptateProducts.js"
 /* import Home from "Home.js" */
 
 function App() {
@@ -24,10 +25,11 @@ function App() {
             <Routes>
               {/* Home */}
               {/* <Route exact path="/" element={<Home />} /> */}
+
               {/* Products */}
               <Route path="/add-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} />
               <Route path="/delete-products" element={<PrivateRoute><DeleteProducts /></PrivateRoute>} />
-              {/* <Route path="/update-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} /> */}
+              <Route path="/update-products" element={<PrivateRoute><UptateProducts /></PrivateRoute>} />
 
               {/* Profile/user */}
               <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>

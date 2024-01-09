@@ -33,7 +33,7 @@ export default function AddProducts() {
 	}
 
 	/* Process products */
-	const handleAddProducts = (e) => {
+	async function handleAddProducts(e) {
 		e.preventDefault();
 
 		/* upload img to storage */
