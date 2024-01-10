@@ -25,7 +25,6 @@ export default function Signup() {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value).then(() => {
-        console.log(usernameRef.current.value)
         let firebaseUser = getAuth().currentUser;
         return updateProfileFirebase(firebaseUser, { displayName: usernameRef.current.value }) /* coi lại sau */
       })

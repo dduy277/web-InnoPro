@@ -5,28 +5,19 @@ import { auth, db } from '../firebase'
 import { collection, getDocs } from "firebase/firestore";
 export default function Home() {
 
-  // getting current user function
+  const [products, setProducts] = useState([]);
+
+  /* get current user  */
   function GetCurrentUser() {
     const [user, setUser] = useState(null);
     useEffect(() => {
       const user = auth.currentUser;
       if (user) {
-        const displayName = user.uid
-        console.log(displayName)
-        setUser('yes');
+        setUser(user.displayName);
       }
       else {
         setUser(null);
       }
-      /* 
-          //db.collection('users').doc(user.uid).get().then(snapshot => {
-          //  setUser(snapshot.data().FullName);
-          //})
-          setUser('yes');
-        }
-
-
-      }) */
     }, [])
     return user;
   }
@@ -34,11 +25,9 @@ export default function Home() {
   const user = GetCurrentUser();
   // console.log(user);
 
-  // state of products
-  const [products, setProducts] = useState([]);
 
-  // getting products function
-  const getProducts = async () => {
+  /* get products  */
+  async function getProducts() {
     const products = await getDocs(collection(db, 'Products'));
     const productsArray = [];
     products.forEach((doc) => {

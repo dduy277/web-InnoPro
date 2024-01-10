@@ -15,35 +15,35 @@ import Home from "./Home.js"
 
 function App() {
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
-        <Router>
-          <AuthProvider>
-            <Routes>
-              {/* Home */}
-              <Route exact path="/" element={<Home />} />
+    /*     <Container
+          className="d-flex align-items-center justify-content-center"
+          style={{ minHeight: "100vh" }}
+        > */
+    //<div className="w-100" style={{ maxWidth: "400px" }}>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          {/* Home */}
+          <Route exact path="/" element={<Home />} />
 
-              {/* Products */}
-              <Route path="/add-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} />
-              <Route path="/delete-products" element={<PrivateRoute><DeleteProducts /></PrivateRoute>} />
-              <Route path="/update-products" element={<PrivateRoute><UptateProducts /></PrivateRoute>} />
+          {/* Products */}
+          <Route path="/add-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} />
+          <Route path="/delete-products" element={<PrivateRoute><DeleteProducts /></PrivateRoute>} />
+          <Route path="/update-products" element={<PrivateRoute><UptateProducts /></PrivateRoute>} />
 
-              {/* Profile/user */}
-              <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
-              <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} ></Route>
+          {/* Profile/user */}
+          <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
+          <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} ></Route>
 
-              {/* Auth */}
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-            </Routes>
-          </AuthProvider>
-        </Router>
-      </div>
-    </Container>
+          {/* Auth */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
+    //</div>
+    /*     </Container> */
   )
 }
 
