@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../../contexts/AuthContext"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, Navigate } from "react-router-dom"
 
 export default function Login() {
   const emailRef = useRef()
@@ -10,6 +10,14 @@ export default function Login() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { currentUser } = useAuth();
+
+  /* kt có login chưa */
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/user")
+    }
+  }, []); /* chắc bỏ [] dc, ko sợ lặp lại */
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -18,7 +26,7 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      navigate("/user")
+      navigate("/")
     } catch {
       setError("Failed to Login")
     }

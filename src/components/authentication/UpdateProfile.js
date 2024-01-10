@@ -7,7 +7,8 @@ export default function UpdateProfile() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { currentUser, updatePassword, updateEmail } = useAuth()
+  const usernameRef = useRef()
+  const { currentUser, updatePassword, updateEmail, updateProfile } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -22,6 +23,9 @@ export default function UpdateProfile() {
     setLoading(true)
     setError("")
 
+    if (usernameRef.current.value) {
+      promises.push(updateProfile(usernameRef.current.value))
+    }
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value))
     }
@@ -48,6 +52,14 @@ export default function UpdateProfile() {
           <h2 className="text-center mb-4">Update Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+            <Form.Group id="username">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="username"
+                ref={usernameRef}
+                placeholder="Leave blank to keep the same"
+              />
+            </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
