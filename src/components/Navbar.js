@@ -16,7 +16,8 @@ export const Navbar = ({ user }) => {
     setError("")
     try {
       await logout().then(() => {
-        navigate("/login")
+        navigate("/")
+        window.location.reload(false);
       })
     } catch {
       setError("Failed to log out")

@@ -11,9 +11,10 @@ export default function Dashboard() {
   async function handleLogout() {
     setError("")
 
+    /* coi lại, bị trùng với Navbar.js */
     try {
       await logout().then(() => {
-        navigate("/login")
+        navigate("/")
       })
     } catch {
       setError("Failed to log out")
