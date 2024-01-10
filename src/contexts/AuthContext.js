@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
   updateEmail as updateEmailFirebase,
   updatePassword as updatePasswordFirebase,
+  onAuthStateChanged
 } from "firebase/auth";
 
 const AuthContext = React.createContext()
@@ -46,8 +47,9 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      console.log(currentUser);
+      setCurrentUser(currentUser);
       setLoading(false);
     });
 

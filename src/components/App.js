@@ -11,7 +11,7 @@ import UpdateProfile from "./authentication/UpdateProfile"
 import AddProducts from "./Product/AddProduct.js"
 import DeleteProducts from "./Product/DeleteProduct.js"
 import UptateProducts from "./Product/UptateProducts.js"
-/* import Home from "Home.js" */
+import Home from "./Home.js"
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
           <AuthProvider>
             <Routes>
               {/* Home */}
-              {/* <Route exact path="/" element={<Home />} /> */}
+              <Route exact path="/" element={<Home />} />
 
               {/* Products */}
               <Route path="/add-products" element={<PrivateRoute><AddProducts /></PrivateRoute>} />

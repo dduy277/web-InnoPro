@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { storage, db } from '../../firebase.js'
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 export default function UpdateProducts() {
   const [title, setTitle] = useState('');
