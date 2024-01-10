@@ -7,7 +7,8 @@ import {
   sendPasswordResetEmail,
   updateEmail as updateEmailFirebase,
   updatePassword as updatePasswordFirebase,
-  onAuthStateChanged
+  updateProfile as updateProfileFirebase,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const AuthContext = React.createContext()
@@ -20,9 +21,9 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
-  function signup(email, password) {
-    setLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
+  async function signup(email, password) {
+    //setLoading(true);
+    await createUserWithEmailAndPassword(auth, email, password)
   }
 
   async function login(email, password) { /* dùng setLoading(true) vẫn dc nhưng await đẹp hơn :v */
@@ -46,6 +47,10 @@ export function AuthProvider({ children }) {
     return updatePasswordFirebase(currentUser, password);
   }
 
+  function updateProfile(username) {
+    return updateProfileFirebase(currentUser, { displayName: username });
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       console.log(currentUser);
@@ -64,6 +69,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
+    updateProfile,
   }
 
   return (

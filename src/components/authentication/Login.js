@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../../contexts/AuthContext"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, Navigate } from "react-router-dom"
 
 export default function Login() {
   const emailRef = useRef()
@@ -11,6 +11,11 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
+  /* kt có login chưa */
+  const { currentUser } = useAuth();
+  if (currentUser == null) {
+    <Navigate to="/user" />
+  }
   async function handleSubmit(e) {
     e.preventDefault()
 

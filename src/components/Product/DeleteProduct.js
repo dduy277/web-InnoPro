@@ -47,7 +47,7 @@ export default function DeleteProducts() {
 
         <br></br>
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button type="submit" className='btn btn-success btn-md'>
+          <button type="submit" className='btn btn-danger btn-md'>
             DELETE
           </button>
         </div>

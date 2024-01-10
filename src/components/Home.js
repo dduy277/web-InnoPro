@@ -9,17 +9,24 @@ export default function Home() {
   function GetCurrentUser() {
     const [user, setUser] = useState(null);
     useEffect(() => {
-      auth.onAuthStateChanged(user => {
-        if (user) {
-          /* db.collection('users').doc(user.uid).get().then(snapshot => {
-            setUser(snapshot.data().FullName);
-          }) */
+      const user = auth.currentUser;
+      if (user) {
+        const displayName = user.uid
+        console.log(displayName)
+        setUser('yes');
+      }
+      else {
+        setUser(null);
+      }
+      /* 
+          //db.collection('users').doc(user.uid).get().then(snapshot => {
+          //  setUser(snapshot.data().FullName);
+          //})
           setUser('yes');
         }
-        else {
-          setUser(null);
-        }
-      })
+
+
+      }) */
     }, [])
     return user;
   }
