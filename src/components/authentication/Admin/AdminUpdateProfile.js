@@ -1,13 +1,18 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../../contexts/AuthContext"
+import { useAuth } from "../../../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from '../../../firebase'
 
 export default function UpdateProfile() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const usernameRef = useRef()
+  const adminRef = useRef()
+  const modRef = useRef()
+  const shipperRef = useRef()
   const { currentUser, updatePassword, updateEmail, updateProfile } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -31,6 +36,16 @@ export default function UpdateProfile() {
     }
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value))
+    }
+    /* if (adminRef.current.value) {
+      promises.push(updateDoc(doc(db, `users`, currentUser.uid), {
+        roles: [adminRef.current.value]
+      }))
+    } */
+    if (modRef.current.value) {
+      promises.push(updateDoc(doc(db, `users`, currentUser.uid), {
+        roles: [modRef.current.value]
+      }))
     }
 
     Promise.all(promises)
@@ -66,7 +81,7 @@ export default function UpdateProfile() {
                 type="email"
                 ref={emailRef}
                 required
-                defaultValue={currentUser.email}
+                placeholder="User Email"
               />
             </Form.Group>
             <Form.Group id="password">
@@ -85,6 +100,31 @@ export default function UpdateProfile() {
                 placeholder="Leave blank to keep the same"
               />
             </Form.Group>
+            {['checkbox'].map((type) => (
+              <div key={`default-${type}`} className="mb-3">
+                <Form.Check /* coi lại sau */
+                  inline
+                  disabled
+                  type={type}
+                  id="admin"
+                  label="admin"
+                />
+                <Form.Check
+                  inline
+                  type={type}
+                  label="mod"
+                  id="mod"
+                  ref={modRef}
+                />
+                <Form.Check
+                  inline
+                  type={type}
+                  label="shipper"
+                  id="shipper"
+                  ref={shipperRef}
+                />
+              </div>
+            ))}
             <Button disabled={loading} className="w-100" type="submit">
               Update
             </Button>

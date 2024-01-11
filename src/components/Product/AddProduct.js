@@ -53,7 +53,7 @@ export default function AddProducts() {
 						price: Number(price),
 						url
 					}
-					const docRef = await setDoc(doc(db, `Products`, `${title}`), docData).then(() => {
+					await setDoc(doc(db, `Products`, `${title}`), docData).then(() => {
 						setSuccessMsg('Product added successfully');
 						setTitle('');
 						setDescription('');

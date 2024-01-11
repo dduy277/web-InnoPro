@@ -24,7 +24,7 @@ export default function UpdateProfile() {
     setError("")
 
     if (usernameRef.current.value) {
-      (updateProfile(usernameRef.current.value))
+      promises.push(updateProfile(usernameRef.current.value))
     }
     if (emailRef.current.value !== currentUser.email) {
       promises.push(updateEmail(emailRef.current.value))
