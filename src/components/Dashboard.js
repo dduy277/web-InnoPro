@@ -10,18 +10,13 @@ export default function Dashboard() {
 
   async function handleLogout() {
     setError("")
-
-    /* kt có login chưa */
-    async function handleLogout() {
-      setError("")
-      try {
-        await logout().then(() => {
-          navigate("/")
-          window.location.reload(false);
-        })
-      } catch {
-        setError("Failed to log out")
-      }
+    try {
+      await logout().then(() => {
+        navigate("/")
+        window.location.reload(false);
+      })
+    } catch {
+      setError("Failed to log out")
     }
   }
 
