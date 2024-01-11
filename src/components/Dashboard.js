@@ -11,13 +11,17 @@ export default function Dashboard() {
   async function handleLogout() {
     setError("")
 
-    /* coi lại, bị trùng với Navbar.js */
-    try {
-      await logout().then(() => {
-        navigate("/")
-      })
-    } catch {
-      setError("Failed to log out")
+    /* kt có login chưa */
+    async function handleLogout() {
+      setError("")
+      try {
+        await logout().then(() => {
+          navigate("/")
+          window.location.reload(false);
+        })
+      } catch {
+        setError("Failed to log out")
+      }
     }
   }
 

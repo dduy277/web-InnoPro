@@ -12,6 +12,7 @@ export const Navbar = ({ user }) => {
   const { currentUser, logout } = useAuth()
   const navigate = useNavigate()
 
+  /* kt có login chưa */
   async function handleLogout() {
     setError("")
     try {
