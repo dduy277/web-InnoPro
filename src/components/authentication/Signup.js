@@ -3,13 +3,16 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import { updateProfile as updateProfileFirebase, getAuth } from "firebase/auth"; /* coi lại sau */
+import { doc, setDoc } from "firebase/firestore";
+import { db } from '../../firebase.js'
 
 export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const usernameRef = useRef()
-  const { signup, updateProfile } = useAuth()
+  const fullnameRef = useRef()
+  const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -28,6 +31,11 @@ export default function Signup() {
         let firebaseUser = getAuth().currentUser;
         return updateProfileFirebase(firebaseUser, { displayName: usernameRef.current.value }) /* coi lại sau */
       })
+      const docData = {
+        Email: emailRef.current.value,
+        Fullname: fullnameRef.current.value,
+      }
+      await setDoc(doc(db, `users`, getAuth().currentUser.uid), docData);
       navigate("/user")
     } catch (error) {
       setError("Failed to create an account")
@@ -46,6 +54,10 @@ export default function Signup() {
             <Form.Group id="username">
               <Form.Label>Username</Form.Label>
               <Form.Control type="username" ref={usernameRef} required />
+            </Form.Group>
+            <Form.Group id="fullname">
+              <Form.Label>Fullname</Form.Label>
+              <Form.Control type="fullname" ref={fullnameRef} required />
             </Form.Group>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>

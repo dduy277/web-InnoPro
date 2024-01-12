@@ -3,6 +3,7 @@ import { Navbar } from './Navbar'
 import { Products } from './Product/Product.js'
 import { auth, db } from '../firebase'
 import { collection, getDocs } from "firebase/firestore";
+
 export default function Home() {
 
   const [products, setProducts] = useState([]);

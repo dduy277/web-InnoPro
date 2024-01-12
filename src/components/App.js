@@ -12,6 +12,8 @@ import AddProducts from "./Product/AddProduct.js"
 import DeleteProducts from "./Product/DeleteProduct.js"
 import UptateProducts from "./Product/UptateProducts.js"
 import Home from "./Home.js"
+import AdminRoute from "./authentication/Admin/AdminRoute.js"
+import AdminUpdateProfile from "./authentication/Admin/AdminUpdateProfile"
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
           {/* Profile/user */}
           <Route path="/user" element={<PrivateRoute><Dashboard /></PrivateRoute>} ></Route>
           <Route path="/update-profile" element={<PrivateRoute><UpdateProfile /></PrivateRoute>} ></Route>
+          <Route path="/admin/update-profile" element={<AdminRoute><AdminUpdateProfile /></AdminRoute>} ></Route>
 
           {/* Auth */}
           <Route path="/signup" element={<Signup />} />
