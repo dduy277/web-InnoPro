@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const Navbar = ({ user }) => {
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
+  const { logout } = useAuth()
   const navigate = useNavigate()
 
   /* kt có login chưa */

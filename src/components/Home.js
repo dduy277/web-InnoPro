@@ -36,6 +36,7 @@ export default function Home() {
       productsArray.push({ ...doc.data() })
     })
     setProducts(productsArray);
+    console.log(productsArray[0].title)
   }
 
   useEffect(() => {
