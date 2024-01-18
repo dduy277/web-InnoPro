@@ -7,9 +7,14 @@ import { db } from '../../../firebase'
 function AdminRoute({ children }) {
   const { currentUser } = useAuth();
   async function Admin() {
-    const UID = await getDoc(doc(db, "users", currentUser.uid))
-    const Admin = UID.data().roles.includes("admin")
-    return Admin
+
+    try {
+      const UID = await getDoc(doc(db, "users", currentUser.uid))
+      const Admin = UID.data().roles.includes("admin")
+      return Admin
+    } catch {
+      return false
+    }
   }
   const isAdmin = Admin()
   //console.log(isAdmin)

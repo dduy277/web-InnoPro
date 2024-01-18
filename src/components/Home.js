@@ -22,7 +22,6 @@ export default function Home() {
     }, [])
     return user;
   }
-
   const user = GetCurrentUser();
   // console.log(user);
 
